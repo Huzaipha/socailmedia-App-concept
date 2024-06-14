@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:ui';
+
 import 'package:db_practice/Screens/Authenticate/SigninScreen.dart';
 import 'package:db_practice/Screens/MainScreens/MyHomePage.dart';
 import 'package:db_practice/Widgets/MyButton.dart';
@@ -7,6 +9,7 @@ import 'package:db_practice/Widgets/TextField.dart';
 import 'package:db_practice/Widgets/fluttertoast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -16,6 +19,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  
   //
 
   bool loading = false;
@@ -37,13 +41,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           children: [
             SizedBox(
               height: 15,
-            ),
-            Icon(
-              Icons.person,
-              size: 150,
-            ),
-            SizedBox(
-              height: 20,
             ),
             Form(
               key: _formkey,
@@ -160,7 +157,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         centerTitle: true,
       ),
-      body: mainBody(),
+      body: Stack(
+        children: [
+          Positioned(
+            bottom: 20,
+            right: 20,
+            left: 20,
+            child: Lottie.asset(
+              'assets/background/Test3.json',
+            ),
+          ),
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+              child: Column(
+                children: [
+                  Lottie.asset(
+                    'assets/background/background.json',
+                  ),
+                  mainBody(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
